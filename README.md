@@ -11,7 +11,3 @@ git clone https://github.com/thinkar0-ai/angra-project.git
 # ディレクトリに移動
 cd angra-project
 ```
-
-## 📝 ライセンス
-
-MIT License
