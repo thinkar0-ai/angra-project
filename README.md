@@ -1,18 +1,17 @@
-# Angra Project
+# 🚀 Angra Project
 
-🚀 テストリポジトリ
+テスト用リポジトリです。
 
-## 概要
-
-このリポジトリはテスト用に作成されました。
-
-## セットアップ
+## 📦 セットアップ
 
 ```bash
+# リポジトリをクローン
 git clone https://github.com/thinkar0-ai/angra-project.git
+
+# ディレクトリに移動
 cd angra-project
 ```
 
-## ライセンス
+## 📝 ライセンス
 
 MIT License

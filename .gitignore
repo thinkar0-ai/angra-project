@@ -1,28 +1,25 @@
-# Dependencies
+# 依存関係
 node_modules/
 
-# Build outputs
+# ビルド出力
 dist/
 build/
 
-# Environment files
+# 環境変数
 .env
 .env.local
 .env.*.local
 
-# Logs
+# ログ
 *.log
 npm-debug.log*
 
-# OS files
+# OS生成ファイル
 .DS_Store
 Thumbs.db
 
-# IDE
-.idea/
+# IDE/エディタ
 .vscode/
+.idea/
 *.swp
 *.swo
-
-# Test coverage
-coverage/
