@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💩 うんこマスター - アングラ集団 💩</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 200, 100, 0.5);
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .status-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.2rem;
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .unko-display {
+            font-size: 4rem;
+            margin: 20px 0;
+            min-height: 80px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(243, 156, 18, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-reset {
+            background: linear-gradient(45deg, #9b59b6, #3498db);
+            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
+        }
+
+        .message {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(46, 204, 113, 0.2);
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fortune {
+            font-size: 1.3rem;
+            padding: 20px;
+            background: linear-gradient(45deg, rgba(241, 196, 15, 0.2), rgba(230, 126, 34, 0.2));
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .aho-words {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .aho-word {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .aho-word:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .console-output {
+            background: #0d0d0d;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .console-line {
+            padding: 5px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        footer {
+            margin-top: 50px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>💩 うんこマスター 💩</h1>
+        <p>アングラ集団へようこそ！</p>
+
+        <div class="status-box">
+            <div class="status-item">
+                <span>👤 名前</span>
+                <span id="name">kyouta</span>
+            </div>
+            <div class="status-item">
+                <span>💩 うんこ回数</span>
+                <span id="unko-count">0</span>
+            </div>
+            <div class="status-item">
+                <span>⚡ パワー</span>
+                <span id="power">9999</span>
+            </div>
+        </div>
+
+        <div class="unko-display" id="unko-display"></div>
+
+        <div>
+            <button class="btn" onclick="doUnko()">💩 うんこする</button>
+            <button class="btn btn-reset" onclick="resetUnko()">🔄 リセット</button>
+        </div>
+
+        <div class="message" id="message">🔥 今日も元気にうんこしよう！ 🔥</div>
+
+        <h3 style="margin-top: 30px;">🎲 アホワード集</h3>
+        <div class="aho-words" id="aho-words"></div>
+
+        <div class="fortune" id="fortune">
+            🌟 今日の運勢を確認するには、うんこしてね！ 🌟
+        </div>
+
+        <div class="console-output" id="console-output">
+            <div class="console-line">$ うんこマスター v1.0.0 起動中...</div>
+            <div class="console-line">$ システム準備完了 ✓</div>
+        </div>
+
+        <footer>
+            <p>🌟 Have a nice unko day! 🌟</p>
+            <p>© 2026 アングラ集団</p>
+        </footer>
+    </div>
+
+    <script>
+        // 🎉 アングラ集団の楽しいコード 🎉
+
+        let unkoCount = 0;
+        let power = 9999;
+
+        const ahoWords = [
+            'うんこ', 'ちんちん', 'おなら', 'ぷぅ〜', 'もりもり',
+            'ブリブリ', 'スッキリ', 'やばたにえん', 'ぴえん🥺', 'パオン🐘'
+        ];
+
+        // アホワードを表示
+        function initAhoWords() {
+            const container = document.getElementById('aho-words');
+            ahoWords.forEach(word => {
+                const el = document.createElement('span');
+                el.className = 'aho-word';
+                el.textContent = word;
+                el.onclick = () => shoutWord(word);
+                container.appendChild(el);
+            });
+        }
+
+        function shoutWord(word) {
+            addConsole(`🗣️ ${word}！！！`);
+            document.getElementById('message').textContent = `🔥🔥🔥 ${word}！！！ 🔥🔥🔥`;
+        }
+
+        // うんこを生成
+        function generateUnko(count) {
+            return '💩'.repeat(count);
+        }
+
+        // ランダムなアホワードを取得
+        function getRandomAhoWord() {
+            return ahoWords[Math.floor(Math.random() * ahoWords.length)];
+        }
+
+        // うんこする
+        function doUnko() {
+            unkoCount++;
+            power += Math.floor(Math.random() * 100);
+
+            document.getElementById('unko-count').textContent = unkoCount;
+            document.getElementById('power').textContent = power;
+            document.getElementById('unko-display').textContent = generateUnko(Math.min(unkoCount, 10));
+
+            const messages = [
+                `${unkoCount}回目のうんこ成功！💩`,
+                `ウオオオオオ！！！ ${unkoCount}回目！！`,
+                `スッキリ〜！ ${unkoCount}回達成！`,
+                `パワーが${power}になった！！`
+            ];
+            document.getElementById('message').textContent = messages[Math.floor(Math.random() * messages.length)];
+
+            addConsole(`$ ${unkoCount}回目のうんこをした！ パワー: ${power}`);
+
+            // 運勢更新
+            document.getElementById('fortune').textContent =
+                `🌟 今日の運勢: ${getRandomAhoWord()} レベル MAX！！ 🌟`;
+        }
+
+        // リセット
+        function resetUnko() {
+            unkoCount = 0;
+            power = 9999;
+            document.getElementById('unko-count').textContent = unkoCount;
+            document.getElementById('power').textContent = power;
+            document.getElementById('unko-display').textContent = '';
+            document.getElementById('message').textContent = '🔄 リセット完了！また頑張ろう！';
+            addConsole('$ システムリセット完了');
+        }
+
+        // コンソール出力
+        function addConsole(text) {
+            const console = document.getElementById('console-output');
+            const line = document.createElement('div');
+            line.className = 'console-line';
+            line.textContent = text;
+            console.appendChild(line);
+            console.scrollTop = console.scrollHeight;
+        }
+
+        // 初期化
+        window.onload = function () {
+            initAhoWords();
+            addConsole('$ アングラ集団へようこそ！');
+            addConsole('$ 🔥🔥🔥 ウオオオオオオ！！！ 🔥🔥🔥');
+        };
+    </script>
+</body>
+
+</html>
